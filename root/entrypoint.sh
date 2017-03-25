@@ -60,7 +60,6 @@ TSTAMP=$(date -u) &&
         --env GITHUB_REGISTRY_TOKEN \
         --env PROJECT_PARENT_BRANCH \
         --user user \
-        --entrypoint bash \
         barbaricwinter/object-drive-ui-oven:0.0.0 &&
     echo \
         docker \
