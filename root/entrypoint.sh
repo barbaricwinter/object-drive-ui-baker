@@ -39,8 +39,22 @@ TSTAMP=$(date -u) &&
         -e "s#deciphernow/dias:latest#${DIAS_DIGEST}#" \
         -e "s#\${CODE}#${CODE}#" \
         -e "s#\${HOMEY}#${HOMEY}#" \
-        -e "w/docker-compose.yml" \
-        /opt/docker/docker-compose.yml &&
+        /opt/docker/docker-compose.yml | docker \
+        run \
+        --interactive \
+        --rm \
+        --volume ${DOCKER_COMPOSE}:/docker-compose \
+        --workdir /docker-compose \
+        alpine:3.4 \
+        tee docker-compose.yml &&
+    docker \
+        run \
+        --interactive \
+        --rm \
+        --volume ${DOCKER_COMPOSE}:/docker-compose \
+        --workdir /docker-compose \
+        alpine:3.4 \
+        chmod 0555 docker-compose.yml &&
     docker \
         run \
         --interactive \
@@ -64,10 +78,11 @@ TSTAMP=$(date -u) &&
         docker \
         run \
         --interactive \
+        --tty \
         --volume ${DOCKER_COMPOSE}:/docker-compose:ro \
         --volume /var/run/docker.sock:/var/run/docker.sock:ro \
         --workdir /docker-compose \
         --entrypoint bash \
         --env HOMEY=${HOMEY} \
         --env CODE=${CODE} \
-        tidyrailroad/docker-compose:0.0.1
+        tidyrailroad/docker-compose:0.1.0
