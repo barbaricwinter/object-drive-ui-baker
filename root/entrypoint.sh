@@ -58,6 +58,7 @@ TSTAMP=$(date -u) &&
         --env NPM_PASSWORD \
         --env NPM_EMAIL \
         --env GITHUB_REGISTRY_TOKEN \
+        --user user \
         barbaricwinter/object-drive-ui-oven:0.0.0 &&
     echo \
         docker \
