@@ -15,6 +15,6 @@
 FROM alpine:3.4
 MAINTAINER Emory Merryman emory.merryman@deciphernow.com
 COPY root /opt/docker/
-RUN ["/usr/bin/sh", "/opt/docker/run.sh"]
-ENTRYPOINT ["/usr/bin/sh", "/opt/docker/entrypoint.sh"]
+RUN ["/bin/sh", "/opt/docker/run.sh"]
+ENTRYPOINT ["/bin/sh", "/opt/docker/entrypoint.sh"]
 CMD []
