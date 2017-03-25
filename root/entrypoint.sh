@@ -26,13 +26,19 @@ TSTAMP=$(date -u) &&
     docker pull deciphernow/metadatadb &&
     docker pull deciphernow/zk &&
     docker pull deciphernow/dias &&
+    AAC_DIGEST=$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/aac:latest) &&
+    GATEKEEPER_DIGEST=$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/gatekeeper:latest) &&
+    ODRIVE_DIGEST=$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/odrive:latest) &&
+    METADATADB_DIGEST=$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/metadatadb:latest) &&
+    ZK_DIGEST=$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/zk:latest) &&
+    DIAS_DIGEST=$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/dias:latest) &&
     sed \
-        -e "s#deciphernow/aac:latest#$(docker inspect --format=\"{{( index .RepoDigests 0)}}\" deciphernow/aac:latest)#" \
-        -e "s#deciphernow/gatekeeper:latest#$(docker inspect --format=\"{{( index .RepoDigests 0)}}\" deciphernow/gatekeeper:latest)#" \
-        -e "s#deciphernow/odrive:latest#$(docker inspect --format=\"{{( index .RepoDigests 0)}}\" deciphernow/odrive:latest)#" \
-        -e "s#deciphernow/metadatadb:latest#$(docker inspect --format=\"{{( index .RepoDigests 0)}}\" deciphernow/metadatadb:latest)#" \
-        -e "s#deciphernow/zk:latest#$(docker inspect --format=\"{{( index .RepoDigests 0)}}\" deciphernow/zk:latest)#" \
-        -e "s#deciphernow/dias:latest#$(docker inspect --format=\"{{( index .RepoDigests 0)}}\" deciphernow/dias:latest)#" \
+        -e "s#deciphernow/aac:latest#${AAC_DIGEST}#" \
+        -e "s#deciphernow/gatekeeper:latest#${GATEKEEPER_DIGEST}#" \
+        -e "s#deciphernow/odrive:latest#${ODRIVE_DIGEST}#" \
+        -e "s#deciphernow/metadatadb:latest#${METADATADB_DIGEST}#" \
+        -e "s#deciphernow/zk:latest#${ZK_DIGEST}#" \
+        -e "s#deciphernow/dias:latest#${DIAS_DIGEST}#" \
         -e "s#\${CODE}${CODE}#" \
         -e "s#\${CODE}${CODE}#" \
         -e "w/docker-compose.yml" \
