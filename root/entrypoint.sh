@@ -27,12 +27,12 @@ TSTAMP=$(date -u) &&
     docker pull deciphernow/zk &&
     docker pull deciphernow/dias &&
     sed \
-        -e "s#deciphernow/aac:latest#$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/aac:latest)#" \
-        -e "s#deciphernow/gatekeeper:latest#$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/gatekeeper:latest)#" \
-        -e "s#deciphernow/odrive:latest#$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/odrive:latest)#" \
-        -e "s#deciphernow/metadatadb:latest#$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/metadatadb:latest)#" \
-        -e "s#deciphernow/zk:latest#$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/zk:latest)#" \
-        -e "s#deciphernow/dias:latest#$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/dias:latest)#" \
+        -e "s#deciphernow/aac:latest#$(docker inspect --format=\"{{( index .RepoDigests 0)}}\" deciphernow/aac:latest)#" \
+        -e "s#deciphernow/gatekeeper:latest#$(docker inspect --format=\"{{( index .RepoDigests 0)}}\" deciphernow/gatekeeper:latest)#" \
+        -e "s#deciphernow/odrive:latest#$(docker inspect --format=\"{{( index .RepoDigests 0)}}\" deciphernow/odrive:latest)#" \
+        -e "s#deciphernow/metadatadb:latest#$(docker inspect --format=\"{{( index .RepoDigests 0)}}\" deciphernow/metadatadb:latest)#" \
+        -e "s#deciphernow/zk:latest#$(docker inspect --format=\"{{( index .RepoDigests 0)}}\" deciphernow/zk:latest)#" \
+        -e "s#deciphernow/dias:latest#$(docker inspect --format=\"{{( index .RepoDigests 0)}}\" deciphernow/dias:latest)#" \
         -e "s#\${CODE}${CODE}#" \
         -e "s#\${CODE}${CODE}#" \
         -e "w/docker-compose.yml" \
@@ -42,8 +42,7 @@ TSTAMP=$(date -u) &&
         --interactive \
         --tty \
         --rm \
-        --volume ${HOME}:/home/user \
-        --volume ${DOCKER_COMPOSE}:/docker-compose \
+        --volume ${HOMEY}:/home/user \
         --volume ${CODE}:/code \
         --env TITLE \
         --env GITLAB_PRIVATE_TOKEN \
@@ -63,4 +62,6 @@ TSTAMP=$(date -u) &&
         --volume /var/run/docker.sock:/var/run/docker.sock:ro \
         --workdir /docker-compose \
         --entrypoint bash \
+        --env HOMEY=${HOMEY} \
+        --env CODE=${CODE} \
         tidyrailroad/docker-compose:0.0.1
