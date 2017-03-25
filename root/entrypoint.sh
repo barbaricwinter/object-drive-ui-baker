@@ -15,7 +15,7 @@
 #    along with baker.  If not, see <http://www.gnu.org/licenses/>.
 
 TSTAMP=$(date -u) &&
-    EXPIRY=$(date -u --date "next month")
+    EXPIRY=$(date -u --date "next week")
     HOME=$(docker volume create --label com.deciphernow.object-drive-ui.expiry=${EXPIRY}) &&
     DOCKER_COMPOSE=$(docker volume create --label com.deciphernow.object-drive-ui.expiry=${EXPIRY}) &&
     CODE=$(docker volume create --label com.deciphernow.object-drive-ui.expiry=${EXPIRY}) &&
@@ -44,6 +44,7 @@ TSTAMP=$(date -u) &&
         --volume ${HOME}:/home/user \
         --volume ${DOCKER_COMPOSE}:/docker-compose \
         --volume ${CODE}:/code \
+        --env TITLE \
         --env GITLAB_PRIVATE_TOKEN \
         --env GIT_USER_NAME \
         --env GIT_USER_EMAIL \
