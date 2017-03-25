@@ -16,6 +16,21 @@
 
 TSTAMP=$(date -u) &&
     EXPIRY=$(date -u --date "next month")
+    docker pull deciphernow/aac &&
+    docker pull deciphernow/gatekeeper &&
+    docker pull deciphernow/odrive &&
+    docker pull deciphernow/metadatadb &&
+    docker pull deciphernow/zk &&
+    docker pull deciphernow/dias &&
+    sed \
+        -e "s#deciphernow/aac:latest#$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/aac:latest)#" \
+        -e "s#deciphernow/gatekeeper:latest#$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/gatekeeper:latest)#" \
+        -e "s#deciphernow/odrive:latest#$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/odrive:latest)#" \
+        -e "s#deciphernow/metadatadb:latest#$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/metadatadb:latest)#" \
+        -e "s#deciphernow/zk:latest#$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/zk:latest)#" \
+        -e "s#deciphernow/dias:latest#$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/dias:latest)#" \
+        -e "w/docker-compose.yml" \
+        /opt/docker/docker-compose.yml &&
     HOME=$(docker volume create --label com.deciphernow.object-drive-ui.expiry=${EXPIRY}) &&
     DOCKER_COMPOSE=$(docker volume create --label com.deciphernow.object-drive-ui.expiry=${EXPIRY}) &&
     CODE=$(docker volume create --label com.deciphernow.object-drive-ui.expiry=${EXPIRY}) &&
