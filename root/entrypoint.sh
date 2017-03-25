@@ -14,10 +14,9 @@
 #    along with object-drive-ui-baker .  If not, see <http://www.gnu.org/licenses/>.
 
 TSTAMP=$(date -u) &&
-    EXPIRY=$(date -u --date "next month")
-    HOMEY=$(docker volume create --label "com.deciphernow.object-drive-ui.expiry=${EXPIRY}") &&
-    DOCKER_COMPOSE=$(docker volume create --label "com.deciphernow.object-drive-ui.expiry=${EXPIRY}") &&
-    CODE=$(docker volume create --label "com.deciphernow.object-drive-ui.expiry=${EXPIRY}") &&
+    HOMEY=$(docker volume create --label "com.deciphernow.object-drive-ui.home.tstamp=${TSTAMP}") &&
+    DOCKER_COMPOSE=$(docker volume create --label "com.deciphernow.object-drive-ui.docker-compose.tstamp=${TSTAMP}") &&
+    CODE=$(docker volume create --label "com.deciphernow.object-drive-ui.code.tstamp=${TSTAMP}") &&
     docker login --username=${DOCKERHUB_USERNAME} --password=${DOCKERHUB_PASSWORD} &&
     docker pull deciphernow/aac &&
     docker pull deciphernow/gatekeeper &&
