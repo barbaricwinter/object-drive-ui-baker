@@ -59,12 +59,13 @@ TSTAMP=$(date -u) &&
         --env NPM_EMAIL \
         --env GITHUB_REGISTRY_TOKEN \
         --user user \
+        --entrypoint bash \
         barbaricwinter/object-drive-ui-oven:0.0.0 &&
     echo \
         docker \
         run \
         --interactive \
-        --volume ${DOCKER_COMPOSE}:/docker-compose \
+        --volume ${DOCKER_COMPOSE}:/docker-compose:ro \
         --volume /var/run/docker.sock:/var/run/docker.sock:ro \
         --workdir /docker-compose \
         --entrypoint bash \
