@@ -39,8 +39,8 @@ TSTAMP=$(date -u) &&
         -e "s#deciphernow/metadatadb:latest#${METADATADB_DIGEST}#" \
         -e "s#deciphernow/zk:latest#${ZK_DIGEST}#" \
         -e "s#deciphernow/dias:latest#${DIAS_DIGEST}#" \
-        -e "s#\${CODE}${CODE}#" \
-        -e "s#\${CODE}${CODE}#" \
+        -e "s#\${CODE}#${CODE}#" \
+        -e "s#\${HOMEY}#${HOMEY}#" \
         -e "w/docker-compose.yml" \
         /opt/docker/docker-compose.yml &&
     docker \
