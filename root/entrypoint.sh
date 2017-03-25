@@ -15,10 +15,10 @@
 #    along with baker.  If not, see <http://www.gnu.org/licenses/>.
 
 TSTAMP=$(date -u) &&
-    EXPIRY=$(date -u --date "next week")
-    HOME=$(docker volume create --label com.deciphernow.object-drive-ui.expiry=${EXPIRY}) &&
-    DOCKER_COMPOSE=$(docker volume create --label com.deciphernow.object-drive-ui.expiry=${EXPIRY}) &&
-    CODE=$(docker volume create --label com.deciphernow.object-drive-ui.expiry=${EXPIRY}) &&
+    EXPIRY=$(date -u --date "next month")
+    HOME=$(docker volume create --label "com.deciphernow.object-drive-ui.expiry=${EXPIRY}") &&
+    DOCKER_COMPOSE=$(docker volume create --label "com.deciphernow.object-drive-ui.expiry=${EXPIRY}") &&
+    CODE=$(docker volume create --label "com.deciphernow.object-drive-ui.expiry=${EXPIRY}") &&
     docker pull deciphernow/aac &&
     docker pull deciphernow/gatekeeper &&
     docker pull deciphernow/odrive &&
