@@ -19,6 +19,7 @@ TSTAMP=$(date -u) &&
     HOME=$(docker volume create --label "com.deciphernow.object-drive-ui.expiry=${EXPIRY}") &&
     DOCKER_COMPOSE=$(docker volume create --label "com.deciphernow.object-drive-ui.expiry=${EXPIRY}") &&
     CODE=$(docker volume create --label "com.deciphernow.object-drive-ui.expiry=${EXPIRY}") &&
+    docker login --username=${DOCKERHUB_USERNAME} --password=${DOCKERHUB_PASSWORD} &&
     docker pull deciphernow/aac &&
     docker pull deciphernow/gatekeeper &&
     docker pull deciphernow/odrive &&
