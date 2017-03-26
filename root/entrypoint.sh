@@ -130,7 +130,7 @@ TSTAMP=$(date -u) &&
         --volume ${CERTS}:/srv/certs \
         --volume ${FIREFOX_HOME}:/home/user \
         alpine:3.4 \
-        cp -f /srv/certs/cert8.db ${CERT8DB} &&
+        cp -f /srv/certs/firefox/cert8.db ${CERT8DB} &&
     echo \
         docker \
         run \
