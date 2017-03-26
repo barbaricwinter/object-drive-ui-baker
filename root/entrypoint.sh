@@ -49,7 +49,19 @@ TSTAMP=$(date -u) &&
         tee docker-compose.yml &&
     sed \
         -e "s#\${AWS_ACCESS_KEY_ID}#${AWS_ACCESS_KEY_ID}#" \
+        -e "s#\${AWS_SECRET_ACCESS_KEY}#${AWS_SECRET_ACCESS_KEY}#" \
+        -e "s#\${AWS_S3_BUCKET}#${AWS_S3_BUCKET}#"  \
+        -e "s#\${CACHE_PARTITION}#${CACHE_PARTITION}#" \
         /opt/docker/odrive.env | docker \
+        run \
+        --interactive \
+        --rm \
+        --volume ${DOCKER_COMPOSE}:/docker-compose \
+        --workdir /docker-compose \
+        alpine:3.4 \
+        tee odrive.env &&
+    cat \
+        /opt/docker/metadatadb.env | docker \
         run \
         --interactive \
         --rm \
