@@ -54,6 +54,7 @@ services:
       - "zk"
       - "odrive"
       - "builder"
+      - "dummy"
     ports:
       - "8080:443"
   odrive:
