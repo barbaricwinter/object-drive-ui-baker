@@ -31,7 +31,7 @@ services:
       - "dias"
       - "zk"
   builder:
-    build: "barbaricwinter/object-drive-ui-runner:0.0.0"
+    image: "barbaricwinter/object-drive-ui-runner:0.0.0"
     stdin_open: true
     tty: true
     volumes:
