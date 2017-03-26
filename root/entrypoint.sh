@@ -116,7 +116,7 @@ TSTAMP=$(date -u) &&
         --entrypoint bash \
         --env HOMEY=${HOMEY} \
         --env CODE=${CODE} \
-        --env DISPLAY \
-        --env HOST_UID \
-        --env HOST_USER \
+        --env DISPLAY=${DISPLAY} \
+        --env HOST_UID=${HOST_UID} \
+        --env HOST_USER=${HOST_USER} \
         tidyrailroad/docker-compose:0.1.0
