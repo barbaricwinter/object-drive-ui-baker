@@ -49,7 +49,7 @@ services:
   firefox:
     image: docker.io/sassmann/debian-firefox
     environment:
-      -DISPLAY
+      - DISPLAY
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
       - /run/${HOST_UID}/pulse/native:/tmp/pulse:ro
