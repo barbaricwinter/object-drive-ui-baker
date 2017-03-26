@@ -117,12 +117,12 @@ TSTAMP=$(date -u) &&
         --volume ${FIREFOX_HOME}:/home/user \
         --device /dev/dri/card0 \
         docker.io/sassmann/debian-firefox &&
-    CERT8DB = $(docker run \
+    CERT8DB=$(docker run \
         --interactive \
         --rm \
         --volume ${FIREFOX_HOME}:/home/user:ro \
         alpine:3.4 \
-        ls /home/user/.mozilla/*.default/cert8.db) &&
+        ls /home/user/.mozilla/firefox/*.default/cert8.db) &&
     cat /opt/docker/cert8.db | docker \
         run \
         --interactive \
