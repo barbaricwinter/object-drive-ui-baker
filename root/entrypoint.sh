@@ -110,7 +110,7 @@ TSTAMP=$(date -u) &&
     docker run \
         --interactive \
         --rm \
-        -env DISPLAY \
+        --env DISPLAY \
         --volume /tmp/.X11-unix:/tmp/.X11-unix:or \
         --volume /run/user/${HOST_UID}/pulse/native:/tmp/pulse \
         --volume /dev/shm:/home/user/Download \
