@@ -111,7 +111,7 @@ TSTAMP=$(date -u) &&
         --interactive \
         --rm \
         --env DISPLAY \
-        --volume /tmp/.X11-unix:/tmp/.X11-unix:or \
+        --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
         --volume /run/user/${HOST_UID}/pulse/native:/tmp/pulse \
         --volume /dev/shm:/home/user/Download \
         --volume ${FIREFOX_HOME}:/home/user \
