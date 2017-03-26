@@ -47,14 +47,16 @@ TSTAMP=$(date -u) &&
         --workdir /docker-compose \
         alpine:3.4 \
         tee docker-compose.yml &&
-    docker \
+    sed \
+        -e "s#\${AWS_ACCESS_KEY_ID}#${AWS_ACCESS_KEY_ID}#" \
+        /opt/docker/odrive.env | docker \
         run \
         --interactive \
         --rm \
         --volume ${DOCKER_COMPOSE}:/docker-compose \
         --workdir /docker-compose \
         alpine:3.4 \
-        chmod 0555 docker-compose.yml &&
+        tee odrive.env &&
     docker \
         run \
         --interactive \
