@@ -40,6 +40,15 @@ services:
       - /home/${HOST_USER}:/home/chromium/.config/pulse:ro
       - home:/data
       - /dev/video0:/dev/video:ro
+  firefox:
+    image: docker.io/sassmann/debian-firefox
+    environment:
+      -DISPLAY
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      - /run/${UID}/pulse/native:/tmp/pulse:ro
+    devices:
+      - /dev/dri/card0
   dummy:
     image: barbaricwinter/object-drive-ui-dummy:0.0.0
     tty: true
