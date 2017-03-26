@@ -20,6 +20,12 @@ volumes:
   home:
     external:
       name: ${HOMEY}
+  chrome_home:
+    external:
+      name: ${CHROME_HOME}
+  firefox_home:
+    external:
+      name: ${FIREFOX_HOME}
 services:
   chromium:
     image: urgemerge/chromium-pulseaudio
@@ -38,7 +44,7 @@ services:
       - /var/lib/dbus:/var/lib/dbus:ro
       - /tmp:/tmp
       - /home/${HOST_USER}:/home/chromium/.config/pulse:ro
-      - home:/data
+      - chrome_home:/data
       - /dev/video0:/dev/video:ro
   firefox:
     image: docker.io/sassmann/debian-firefox
@@ -46,7 +52,7 @@ services:
       -DISPLAY
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
-      - /run/${UID}/pulse/native:/tmp/pulse:ro
+      - /run/${HOST_UID}/pulse/native:/tmp/pulse:ro
     devices:
       - /dev/dri/card0
   dummy:

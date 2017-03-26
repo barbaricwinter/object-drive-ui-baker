@@ -15,6 +15,8 @@
 
 TSTAMP=$(date -u) &&
     HOMEY=$(docker volume create --label "com.deciphernow.object-drive-ui.home.tstamp=${TSTAMP}") &&
+    CHROMIUM_HOMEY=$(docker volume create --label "com.deciphernow.object-drive-ui.chromium-home.tstamp=${TSTAMP}") &&
+    FIREFOX_HOMEY=$(docker volume create --label "com.deciphernow.object-drive-ui.firefox-home.tstamp=${TSTAMP}") &&
     DOCKER_COMPOSE=$(docker volume create --label "com.deciphernow.object-drive-ui.docker-compose.tstamp=${TSTAMP}") &&
     CODE=$(docker volume create --label "com.deciphernow.object-drive-ui.code.tstamp=${TSTAMP}") &&
     docker login --username=${DOCKERHUB_USERNAME} --password=${DOCKERHUB_PASSWORD} &&
@@ -115,6 +117,8 @@ TSTAMP=$(date -u) &&
         --workdir /docker-compose \
         --entrypoint bash \
         --env HOMEY=${HOMEY} \
+        --env CHROME_HOME=${CHROME_HOME} \
+        --env FIREFOX_HOME=${FIREFOX_HOME} \
         --env CODE=${CODE} \
         --env DISPLAY=${DISPLAY} \
         --env HOST_UID=${HOST_UID} \
