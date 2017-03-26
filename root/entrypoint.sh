@@ -122,28 +122,15 @@ TSTAMP=$(date -u) &&
         --rm \
         --volume ${FIREFOX_HOME}:/home/user:ro \
         alpine:3.4 \
-        find /home/user/.mozilla/firefox/ -name cert8.db) &&
-    cat /opt/docker/cert8.db | docker \
-        run \
-        --interactive \
-        --rm \
-        --volume ${FIREFOX_HOME}:/home/user \
-        alpine:3.4 \
-        tee ${CERT8DB} &&
+        find /home/user/.mozilla/firefox/ --name cert8.db) &&
     docker \
         run \
         --interactive \
         --rm \
+        --volume ${CERTS}:/srv/certs \
         --volume ${FIREFOX_HOME}:/home/user \
         alpine:3.4 \
-        chmod 0600 ${CERT8DB} &&
-    docker \
-        run \
-        --interactive \
-        --rm \
-        --volume ${FIREFOX_HOME}:/home/user \
-        alpine:3.4 \
-        chown user:user ${CERT8DB} &&
+        cp -f /srv/certs/cert8.db ${CERT8DB} &&
     echo \
         docker \
         run \
