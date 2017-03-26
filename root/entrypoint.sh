@@ -69,6 +69,23 @@ TSTAMP=$(date -u) &&
         --workdir /docker-compose \
         alpine:3.4 \
         tee metadatadb.env &&
+    cat \
+        /opt/docker/dummy.sh | docker \
+        run \
+        --interactive \
+        --rm \
+        --volume ${DOCKER_COMPOSE}:/docker-compose \
+        --workdir /docker-compose \
+        alpine:3.4 \
+        tee dummy.sh &&
+    docker \
+        run \
+        --interactive \
+        --rm \
+        --volume ${DOCKER_COMPOSE}:/docker-compose \
+        --workdir /docker-compose \
+        alpine:3.4 \
+        chmod 0500 dummy.sh &&
     docker \
         run \
         --interactive \
