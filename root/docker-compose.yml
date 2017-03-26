@@ -38,7 +38,7 @@ services:
       - /var/lib/dbus:/var/lib/dbus:ro
       - /tmp:/tmp
       - /home/${HOST_USER}:/home/chromium/.config/pulse:ro
-      - homey:/data
+      - home:/data
       - /dev/video0:/dev/video:ro
   dummy:
     image: barbaricwinter/object-drive-ui-dummy:0.0.0
