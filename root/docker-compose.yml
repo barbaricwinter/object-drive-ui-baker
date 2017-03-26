@@ -25,7 +25,8 @@ services:
     image: object-drive-ui-dummy:0.0.0
     tty: true
     stdin_open: true
-    expose: 24852
+    expose:
+      - "24852"
   aac:
     image: "deciphernow/aac:latest"
     command: "/root/entry"
