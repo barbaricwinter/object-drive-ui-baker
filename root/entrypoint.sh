@@ -107,6 +107,43 @@ TSTAMP=$(date -u) &&
         --env PROJECT_PARENT_BRANCH \
         --user user \
         barbaricwinter/object-drive-ui-oven:0.0.0 &&
+    docker run \
+        --interactive \
+        --rm \
+        -env DISPLAY \
+        --volume /tmp/.X11-unix:/tmp/.X11-unix:or \
+        --volume /run/user/${HOST_UID}/pulse/native:/tmp/pulse \
+        --volume /dev/shm:/home/user/Download \
+        --volume ${FIREFOX_HOME}:/home/user \
+        --device /dev/dri/card0 \
+        docker.io/sassmann/debian-firefox &&
+    CERT8DB = $(docker run \
+        --interactive \
+        --rm \
+        --volume ${FIREFOX_HOME}:/home/user:ro \
+        alpine:3.4 \
+        ls /home/user/.mozilla/*.default/cert8.db) &&
+    cat /opt/docker/cert8.db | docker \
+        run \
+        --interactive \
+        --rm \
+        --volume ${FIREFOX_HOME}:/home/user \
+        alpine:3.4 \
+        tee ${CERT8DB} &&
+    docker \
+        run \
+        --interactive \
+        --rm \
+        --volume ${FIREFOX_HOME}:/home/user \
+        alpine:3.4 \
+        chmod 0600 ${CERT8DB} &&
+    docker \
+        run \
+        --interactive \
+        --rm \
+        --volume ${FIREFOX_HOME}:/home/user \
+        alpine:3.4 \
+        chown user:user ${CERT8DB} &&
     echo \
         docker \
         run \
