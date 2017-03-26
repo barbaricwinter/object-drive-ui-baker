@@ -122,7 +122,7 @@ TSTAMP=$(date -u) &&
         --rm \
         --volume ${FIREFOX_HOME}:/home/user:ro \
         alpine:3.4 \
-        find /home/user/.mozilla/firefox/ --name cert8.db) &&
+        find /home/user/.mozilla/firefox/ -name cert8.db) &&
     docker \
         run \
         --interactive \
