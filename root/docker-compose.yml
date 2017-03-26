@@ -22,7 +22,7 @@ volumes:
       name: ${HOMEY}
 services:
   dummy:
-    image: object-drive-ui-dummy:0.0.0
+    image: barbaricwinter/object-drive-ui-dummy:0.0.0
     tty: true
     stdin_open: true
     expose:
