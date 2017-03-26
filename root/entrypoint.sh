@@ -68,7 +68,7 @@ TSTAMP=$(date -u) &&
         --volume ${DOCKER_COMPOSE}:/docker-compose \
         --workdir /docker-compose \
         alpine:3.4 \
-        tee odrive.env &&
+        tee metadatadb.env &&
     docker \
         run \
         --interactive \
