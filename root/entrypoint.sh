@@ -155,7 +155,7 @@ TSTAMP=$(date -u) &&
         --entrypoint bash \
         --env CERTS=${CERTS} \
         --env HOMEY=${HOMEY} \
-        --env CHROME_HOME=${CHROME_HOME} \
+        --env CHROMIUM_HOME=${CHROMIUM_HOME} \
         --env FIREFOX_HOME=${FIREFOX_HOME} \
         --env CODE=${CODE} \
         --env DISPLAY=${DISPLAY} \
