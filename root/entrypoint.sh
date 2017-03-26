@@ -116,6 +116,7 @@ TSTAMP=$(date -u) &&
         --volume /var/run/docker.sock:/var/run/docker.sock:ro \
         --workdir /docker-compose \
         --entrypoint bash \
+        --env CERTS=${CERTS} \
         --env HOMEY=${HOMEY} \
         --env CHROME_HOME=${CHROME_HOME} \
         --env FIREFOX_HOME=${FIREFOX_HOME} \

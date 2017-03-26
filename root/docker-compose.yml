@@ -20,6 +20,9 @@ volumes:
   home:
     external:
       name: ${HOMEY}
+  certs:
+    external:
+      name: ${CERTS}
   chrome_home:
     external:
       name: ${CHROME_HOME}
@@ -46,6 +49,7 @@ services:
       - /home/${HOST_USER}:/home/chromium/.config/pulse:ro
       - chrome_home:/data
       - /dev/video0:/dev/video:ro
+      - certs:/certs:ro
   firefox:
     image: docker.io/sassmann/debian-firefox
     environment:
@@ -53,6 +57,8 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
       - /run/${HOST_UID}/pulse/native:/tmp/pulse:ro
+      - firefox_home:/home/user
+      - certs:/certs:ro
     devices:
       - /dev/dri/card0
   dummy:
