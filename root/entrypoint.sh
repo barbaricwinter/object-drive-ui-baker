@@ -41,6 +41,7 @@ TSTAMP=$(date -u) &&
         -e "s#deciphernow/dias:latest#${DIAS_DIGEST}#" \
         -e "s#\${CODE}#${CODE}#" \
         -e "s#\${HOMEY}#${HOMEY}#" \
+        -e "s#\${CHROMIUM_HOME}#${CHROMIUM_HOME}#" \
         /opt/docker/docker-compose.yml | docker \
         run \
         --interactive \
