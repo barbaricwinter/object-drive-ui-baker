@@ -15,7 +15,7 @@
 
 TSTAMP=$(date -u) &&
     HOMEY=$(docker volume create --label "com.deciphernow.object-drive-ui.home.tstamp=${TSTAMP}") &&
-    CHROMIUM_HOME=$(docker volume create --label "com.deciphernow.object-drive-ui.chromium-home.tstamp=${TSTAMP}") &&
+    CHROMIUM_HOME=$(docker volume ls --quiet --filter label=com.deciphernow.emorymerryman.object-drive-ui.chrome) &&
     FIREFOX_HOME=$(docker volume create --label "com.deciphernow.object-drive-ui.firefox-home.tstamp=${TSTAMP}") &&
     DOCKER_COMPOSE=$(docker volume create --label "com.deciphernow.object-drive-ui.docker-compose.tstamp=${TSTAMP}") &&
     CODE=$(docker volume create --label "com.deciphernow.object-drive-ui.code.tstamp=${TSTAMP}") &&
