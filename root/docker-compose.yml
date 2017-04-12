@@ -51,13 +51,14 @@ services:
       - /dev/video0:/dev/video:ro
       - certs:/certs:ro
   firefox:
-    image: docker.io/sassmann/debian-firefox
+    image: tidyrailroad/firefox:0.0.0
+    shm_size: "256m"
     environment:
       - DISPLAY
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
       - /run/${HOST_UID}/pulse/native:/tmp/pulse:ro
-      - firefox_home:/home/user
+      - firefox_home:/root
       - certs:/certs:ro
     devices:
       - /dev/dri/card0

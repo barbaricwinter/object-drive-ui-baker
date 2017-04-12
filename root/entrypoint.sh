@@ -16,7 +16,7 @@
 TSTAMP=$(date -u) &&
     HOMEY=$(docker volume create --label "com.deciphernow.object-drive-ui.home.tstamp=${TSTAMP}") &&
     CHROMIUM_HOME=$(docker volume ls --quiet --filter label=com.deciphernow.emorymerryman.object-drive-ui.chrome) &&
-    FIREFOX_HOME=$(docker volume create --label "com.deciphernow.object-drive-ui.firefox-home.tstamp=${TSTAMP}") &&
+    FIREFOX_HOME=$(docker volume ls --quiet --filter label=com.deciphernow.emorymerryman.object-drive-ui.firefox)  &&
     DOCKER_COMPOSE=$(docker volume create --label "com.deciphernow.object-drive-ui.docker-compose.tstamp=${TSTAMP}") &&
     CODE=$(docker volume create --label "com.deciphernow.object-drive-ui.code.tstamp=${TSTAMP}") &&
     docker login --username=${DOCKERHUB_USERNAME} --password=${DOCKERHUB_PASSWORD} &&
@@ -38,10 +38,11 @@ TSTAMP=$(date -u) &&
         -e "s#deciphernow/odrive:latest#${ODRIVE_DIGEST}#" \
         -e "s#deciphernow/metadatadb:latest#${METADATADB_DIGEST}#" \
         -e "s#deciphernow/zk:latest#${ZK_DIGEST}#" \
-        -e "s#deciphernow/dias:latest#${DIAS_DIGEST}#" \
+        -e "s#decdockiphernow/dias:latest#${DIAS_DIGEST}#" \
         -e "s#\${CODE}#${CODE}#" \
         -e "s#\${HOMEY}#${HOMEY}#" \
         -e "s#\${CHROMIUM_HOME}#${CHROMIUM_HOME}#" \
+        -e "s#\${FIREFOX_HOME}#${FIREFOX_HOME}#" \
         /opt/docker/docker-compose.yml | docker \
         run \
         --interactive \
@@ -122,30 +123,6 @@ TSTAMP=$(date -u) &&
         --env CHROMIUM_HOME=${CHROMIUM_HOME} \
         --user user \
         barbaricwinter/object-drive-ui-oven:0.0.0 &&
-    docker run \
-        --interactive \
-        --rm \
-        --env DISPLAY \
-        --volume /tmp/.X11-unix:/tmp/.X11-unix:ro \
-        --volume /run/user/${HOST_UID}/pulse/native:/tmp/pulse \
-        --volume /dev/shm:/home/user/Download \
-        --volume ${FIREFOX_HOME}:/home/user \
-        --device /dev/dri/card0 \
-        docker.io/sassmann/debian-firefox &&
-    CERT8DB=$(docker run \
-        --interactive \
-        --rm \
-        --volume ${FIREFOX_HOME}:/home/user:ro \
-        alpine:3.4 \
-        find /home/user/.mozilla/firefox/ -name cert8.db) &&
-    docker \
-        run \
-        --interactive \
-        --rm \
-        --volume ${CERTS}:/srv/certs \
-        --volume ${FIREFOX_HOME}:/home/user \
-        alpine:3.4 \
-        cp -f /srv/certs/firefox/cert8.db ${CERT8DB} &&
     echo \
         docker \
         run \
