@@ -119,6 +119,7 @@ TSTAMP=$(date -u) &&
         --env NPM_EMAIL \
         --env GITHUB_REGISTRY_TOKEN \
         --env PROJECT_PARENT_BRANCH \
+        --env CHROMIUM_HOME=${CHROMIUM_HOME} \
         --user user \
         barbaricwinter/object-drive-ui-oven:0.0.0 &&
     docker run \
