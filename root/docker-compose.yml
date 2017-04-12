@@ -47,7 +47,7 @@ services:
       - /var/lib/dbus:/var/lib/dbus:ro
       - /tmp:/tmp
       - /home/${HOST_USER}:/home/chromium/.config/pulse:ro
-      - chromium_home:/data
+      - chromium_home:/home/chromium
       - /dev/video0:/dev/video:ro
       - certs:/certs:ro
   firefox:
