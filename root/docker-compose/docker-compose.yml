@@ -30,6 +30,9 @@ volumes:
     external:
       name: ${FIREFOX_HOME}
   c9-home:
+  ie11-box:
+    external:
+      name: 475f174ed3a93f29bca6af67ad97375964d3536330449c185161fdb1d1e2cc02
 services:
   cloud9:
     image: tidyrailroad/cloud9:5.0.0
@@ -72,12 +75,13 @@ services:
       - certs:/certs:ro
     devices:
       - /dev/dri/card0
-  virtualbox:
-    image: tidyrailroad/virtualbox:0.0.0
+  ie11:
+    build: images/ie11
     privileged: true
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:ro
       - /dev/vboxdrv:/dev/vboxdrv:ro
+      - ie11-box:/srv:ro
     environment:
       - DISPLAY
   dummy:
