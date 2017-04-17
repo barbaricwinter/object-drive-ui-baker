@@ -72,6 +72,14 @@ services:
       - certs:/certs:ro
     devices:
       - /dev/dri/card0
+  virtualbox:
+    image: tidyrailroad/virtualbox:0.0.0
+    privileged: true
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      - /dev/vboxdrv:/dev/vboxdrv:ro
+    environment:
+      - DISPLAY
   dummy:
     image: barbaricwinter/object-drive-ui-dummy:0.0.0
     tty: true
