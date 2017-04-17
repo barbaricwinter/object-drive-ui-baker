@@ -29,7 +29,17 @@ volumes:
   firefox_home:
     external:
       name: ${FIREFOX_HOME}
+  c9-home:
 services:
+  cloud9:
+    image: tidyrailroad/cloud9:5.0.0
+    environment:
+      - DISPLAY
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:ro
+      - code:/usr/local/src
+      - c9-home:/root
+    command: "-w /usr/local/src --auth user:password --listen 0.0.0.0"
   chromium:
     image: urgemerge/chromium-pulseaudio
     privileged: true
