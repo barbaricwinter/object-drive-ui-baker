@@ -32,25 +32,14 @@ TSTAMP=$(date -u) &&
     METADATADB_DIGEST=$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/metadatadb:latest) &&
     ZK_DIGEST=$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/zk:latest) &&
     DIAS_DIGEST=$(docker inspect --format="{{( index .RepoDigests 0)}}" deciphernow/dias:latest) &&
-    sed \
-        -e "s#deciphernow/aac:latest#${AAC_DIGEST}#" \
-        -e "s#deciphernow/gatekeeper:latest#${GATEKEEPER_DIGEST}#" \
-        -e "s#deciphernow/odrive:latest#${ODRIVE_DIGEST}#" \
-        -e "s#deciphernow/metadatadb:latest#${METADATADB_DIGEST}#" \
-        -e "s#deciphernow/zk:latest#${ZK_DIGEST}#" \
-        -e "s#decdockiphernow/dias:latest#${DIAS_DIGEST}#" \
-        -e "s#\${CODE}#${CODE}#" \
-        -e "s#\${HOMEY}#${HOMEY}#" \
-        -e "s#\${CHROMIUM_HOME}#${CHROMIUM_HOME}#" \
-        -e "s#\${FIREFOX_HOME}#${FIREFOX_HOME}#" \
-        /opt/docker/docker-compose.yml | docker \
+    tar -C /opt/docker/docker-compose -c . | docker \
         run \
         --interactive \
         --rm \
         --volume ${DOCKER_COMPOSE}:/docker-compose \
         --workdir /docker-compose \
         alpine:3.4 \
-        tee docker-compose.yml &&
+        tar -x &&
     sed \
         -e "s#\${AWS_ACCESS_KEY_ID}#${AWS_ACCESS_KEY_ID}#" \
         -e "s#\${AWS_SECRET_ACCESS_KEY}#${AWS_SECRET_ACCESS_KEY}#" \
@@ -132,6 +121,12 @@ TSTAMP=$(date -u) &&
         --volume /var/run/docker.sock:/var/run/docker.sock:ro \
         --workdir /docker-compose \
         --entrypoint bash \
+        --env AAC_DIGEST=${AAC_DIGEST} \
+        --env GATEKEEPER_DIGEST=${GATEKEEPER_DIGEST} \
+        --env ODRIVE_DIGEST=${ODRIVE_DIGEST} \
+        --env METADATADB_DIGEST=${METADATADB_DIGEST} \
+        --env ZK_DIGEST=${ZK_DIGEST} \
+        --env DIAS_DIGEST=${DIAS_DIGEST} \
         --env CERTS=${CERTS} \
         --env HOMEY=${HOMEY} \
         --env CHROMIUM_HOME=${CHROMIUM_HOME} \
