@@ -35,7 +35,7 @@ volumes:
       name: 475f174ed3a93f29bca6af67ad97375964d3536330449c185161fdb1d1e2cc02
 services:
   cloud9:
-    image: tidyrailroad/cloud9:5.0.0
+    build: images/cloud9
     environment:
       - DISPLAY
     volumes:
@@ -91,7 +91,7 @@ services:
     expose:
       - "24852"
   aac:
-    image: "deciphernow/aac:latest"
+    image: "${AAC_DIGEST}"
     command: "/root/entry"
     hostname: "twl-server-generic2"
     tty: true
@@ -108,7 +108,7 @@ services:
       - "home:/home/user"
     working_dir: /code
   gatekeeper:
-    image: "deciphernow/gatekeeper:latest"
+    image: "${GATEKEPER_DIGEST}"
     command: "/root/entry"
     tty: true
     stdin_open: true
@@ -121,7 +121,7 @@ services:
     ports:
       - "8080:443"
   odrive:
-    image: "deciphernow/odrive:latest"
+    image: "${ODRIVE_DIGEST}"
     environment:
       - OD_AAC_CA=/go/src/decipher.com/object-drive-server/defaultcerts/client-aac/trust/client.trust.pem
       - OD_AAC_CERT=/go/src/decipher.com/object-drive-server/defaultcerts/client-aac/id/client.cert.pem
@@ -164,7 +164,7 @@ services:
       - "aac"
       - "zk"
   metadatadb:
-    image: "deciphernow/metadatadb:latest"
+    image: "${METADATDB_DIGEST}"
     env_file: "metadatadb.env"
     command: "./docker-entrypoint.sh mysqld_safe"
   zk:
