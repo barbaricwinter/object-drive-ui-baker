@@ -75,15 +75,6 @@ services:
       - certs:/certs:ro
     devices:
       - /dev/dri/card0
-  ie11:
-    build: images/ie11
-    privileged: true
-    volumes:
-      - /tmp/.X11-unix:/tmp/.X11-unix:ro
-      - /dev/vboxdrv:/dev/vboxdrv:ro
-      - ie11-box:/srv:ro
-    environment:
-      - DISPLAY
   dummy:
     image: barbaricwinter/object-drive-ui-dummy:0.0.0
     tty: true
@@ -108,7 +99,7 @@ services:
       - "home:/home/user"
     working_dir: /code
   gatekeeper:
-    image: "${GATEKEPER_DIGEST}"
+    image: "${GATEKEEPER_DIGEST}"
     command: "/root/entry"
     tty: true
     stdin_open: true
@@ -164,7 +155,7 @@ services:
       - "aac"
       - "zk"
   metadatadb:
-    image: "${METADATDB_DIGEST}"
+    image: "${METADATADB_DIGEST}"
     env_file: "metadatadb.env"
     command: "./docker-entrypoint.sh mysqld_safe"
   zk:
